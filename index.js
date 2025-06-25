@@ -65,4 +65,4 @@ setTimeout(function(){
       $("#contact").removeClass("animated fadeIn");
       $("#work").removeClass("animated fadeIn");
     },1000);
-},1500);
+},1500); 

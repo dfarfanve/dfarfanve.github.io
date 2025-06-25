@@ -3,43 +3,127 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Daniel Farfán | Full Stack Developer</title>
+    <title id="pageTitle">Daniel Farfan | Software Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
     <style>
       body {
         font-family: 'Inter', sans-serif;
+        position: relative;
+        z-index: 1;
       }
+      .code-bg {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: 0;
+        opacity: 0.25;
+        pointer-events: none;
+        font-family: 'Fira Mono', 'Consolas', 'Monaco', monospace;
+        font-size: 1.2rem;
+        white-space: pre;
+        background: #1e1e1e;
+        color: #d4d4d4;
+        line-height: 1.7;
+        padding: 2rem;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .code-bg .keyword { color: #569cd6; }
+      .code-bg .class { color: #4ec9b0; }
+      .code-bg .string { color: #ce9178; }
+      .code-bg .method { color: #dcdcaa; }
+      .code-bg .paren { color: #d4d4d4; }
+      .code-bg .var { color: #9cdcfe; }
+      .code-bg .comment { color: #6a9955; }
+      .contact-icon {
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+      }
+      .contact-icon:hover {
+        transform: scale(1.1);
+      }
+      .skills-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+      .skills-row i {
+        font-size: 3rem;
+        transition: transform 0.3s ease;
+      }
+      .skills-row i:hover {
+        transform: scale(1.2);
+      }
+      .keyword { color: #569cd6; }
+      .class { color: #4ec9b0; }
+      .string { color: #ce9178; }
+      .method { color: #dcdcaa; }
+      .paren { color: #d4d4d4; }
+      .var { color: #9cdcfe; }
+      .comment { color: #6a9955; }
     </style>
   </head>
   <body class="bg-white text-gray-800">
     <!-- Header -->
     <header class="flex items-center justify-between px-6 py-4 border-b shadow-sm">
-      <div class="text-2xl font-extrabold text-gray-900">DF</div>
+      <div class="text-2xl font-extrabold text-gray-900 cursor-pointer" id="df-initials" title="Click me!">DF</div>
       <nav class="space-x-4">
-        <a href="#about" class="text-sm font-semibold hover:text-blue-600">About</a>
-        <a href="#skills" class="text-sm font-semibold hover:text-blue-600">Skills</a>
-        <a href="#experience" class="text-sm font-semibold hover:text-blue-600">Experience</a>
-        <a href="#contact" class="text-sm font-semibold hover:text-blue-600">Contact</a>
+        <a href="#about" class="text-sm font-semibold hover:text-blue-600" data-key="about">Acerca</a>
+        <a href="#skills" class="text-sm font-semibold hover:text-blue-600" data-key="skills">Skills</a>
+        <a href="#experience" class="text-sm font-semibold hover:text-blue-600" data-key="experience">Experience</a>
+        <a href="#contact" class="text-sm font-semibold hover:text-blue-600" data-key="contact">Contact</a>
+        <button id="lang-en" class="text-sm font-semibold hover:text-blue-600">EN</button>
+        <button id="lang-es" class="text-sm font-semibold hover:text-blue-600">ES</button>
       </nav>
     </header>
 
+    <!-- Modal for DF initials -->
+    <div id="df-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+      <div class="bg-white rounded-lg p-6 max-w-md mx-4">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-bold text-gray-900" data-key="modalTitle">¡Sabías que mis iniciales significan?</h3>
+          <button id="close-modal" class="text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+        </div>
+        <div class="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm overflow-x-auto">
+          <pre><code id="modalCode">print("After a while, crocodile!")</code></pre>
+        </div>
+        <div class="mt-4 text-center">
+          <button id="close-modal-btn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            <span data-key="closeModal">Cerrar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Hero -->
     <section class="text-center py-16 px-4">
-      <h1 class="text-4xl font-bold mb-2">Daniel Farfán</h1>
-      <h2 class="text-xl text-gray-600">Full Stack Developer / Athlete / Human</h2>
+      <h1 class="text-4xl font-bold mb-2 cursor-pointer" id="main-name" title="Click me!" onclick="window.location.reload()">Daniel Farfan</h1>
+      <h2 class="text-xl text-gray-600">Software Developer / Athlete / Human</h2>
+      <div class="mt-6">
+        <a href="assets/Daniel_Farfan_CV_EN.pdf" id="cv-download" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors" target="_blank">
+          <i class="fas fa-download mr-2"></i>
+          <span data-key="downloadCV">Download CV</span>
+        </a>
+      </div>
     </section>
 
     <!-- About -->
     <section id="about" class="max-w-3xl mx-auto px-6 py-12">
-      <h2 class="text-2xl font-bold mb-4">About Me</h2>
-      <p class="mb-4">
+      <h2 class="text-2xl font-bold mb-4" data-key="aboutMeTitle">Sobre Mí</h2>
+      <p class="mb-4" data-key="aboutMeP1">
         I am Daniel, a multifaceted man: son, father, hybrid athlete, Christian, mountaineer, and amateur photographer. But among my many roles, it's software development that I want to talk about.
       </p>
-      <p class="mb-4">
+      <p class="mb-4" data-key="aboutMeP2">
         I believe in the transformative power of technology to empower people to achieve their wildest dreams. If you're looking for a passionate, experienced software developer, look no further!
       </p>
-      <p>
+      <p data-key="aboutMeP3">
         As a developer, I feel privileged to play — one line of code at a time.
       </p>
     </section>
@@ -47,73 +131,157 @@
     <!-- Skills -->
     <section id="skills" class="bg-gray-50 py-12 px-6">
       <div class="max-w-5xl mx-auto">
-        <h2 class="text-2xl font-bold mb-6 text-center">Skills</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-center">
-          <div>Java</div>
-          <div>Spring</div>
-          <div>Hibernate</div>
-          <div>React</div>
-          <div>HTML / CSS / JS</div>
-          <div>MySQL / Oracle</div>
-          <div>PL/SQL</div>
-          <div>Git / GitHub</div>
-          <div>Docker</div>
-          <div>SOAP / REST</div>
-          <div>Postman</div>
-          <div>JIRA</div>
+        <h2 class="text-2xl font-bold mb-6 text-center" data-key="skillsTitle">Skills</h2>
+        <div class="skills-row">
+          <i class="devicon-java-plain colored" title="Java"></i>
+          <i class="devicon-spring-plain colored" title="Spring"></i>
+          <i class="devicon-hibernate-plain colored" title="Hibernate"></i>
+          <i class="devicon-react-original colored" title="React"></i>
+          <i class="devicon-html5-plain colored" title="HTML5"></i>
+          <i class="devicon-css3-plain colored" title="CSS3"></i>
+          <i class="devicon-javascript-plain colored" title="JavaScript"></i>
+          <i class="devicon-mysql-plain colored" title="MySQL"></i>
+          <i class="devicon-oracle-original colored" title="Oracle"></i>
+          <i class="devicon-git-plain colored" title="Git"></i>
+          <i class="devicon-github-original colored" title="GitHub"></i>
+          <i class="devicon-docker-plain colored" title="Docker"></i>
+          <i class="devicon-linux-plain colored" title="Linux"></i>
+          <i class="devicon-postgresql-plain colored" title="PostgreSQL"></i>
+          <i class="devicon-jira-plain colored" title="Jira"></i>
+          <i class="devicon-azure-plain colored" title="Azure"></i>
         </div>
       </div>
     </section>
 
     <!-- Experience -->
     <section id="experience" class="max-w-4xl mx-auto px-6 py-12">
-      <h2 class="text-2xl font-bold mb-6">Experience</h2>
+      <h2 class="text-2xl font-bold mb-6" data-key="experienceTitle">Experience</h2>
       <div class="space-y-6">
         <div>
-          <h3 class="text-lg font-semibold">Seguros Azteca</h3>
-          <p class="text-sm text-gray-600">Support Manager and Senior Developer – Jan 2023 to Mar 2024</p>
+          <h3 class="text-lg font-semibold flex items-center gap-2">
+            <span data-key="expBanRuralTitle">BanRural</span>
+            <span class="text-sm text-gray-500">Consis Internacional</span>
+            <span class="text-lg">🇬🇹</span>
+            <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Partial Remote</span>
+          </h3>
+          <p class="text-sm text-gray-600" data-key="expBanRuralDesc">Java Developer – March 2024 to Present</p>
         </div>
         <div>
-          <h3 class="text-lg font-semibold">Rimac Seguros</h3>
-          <p class="text-sm text-gray-600">Java Senior Developer – Dec 2019 to Dec 2022</p>
+          <h3 class="text-lg font-semibold flex items-center gap-2">
+            <span data-key="expSegurosAztecaTitle">Seguros Azteca</span>
+            <span class="text-sm text-gray-500">Consis Internacional</span>
+            <span class="text-lg">🇲🇽</span>
+            <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Remote</span>
+          </h3>
+          <p class="text-sm text-gray-600" data-key="expSegurosAztecaDesc">Support Manager and Senior Developer – January 2023 to March 2024</p>
         </div>
         <div>
-          <h3 class="text-lg font-semibold">Interseguro</h3>
-          <p class="text-sm text-gray-600">Support Java Developer – May 2018 to Nov 2019</p>
+          <h3 class="text-lg font-semibold flex items-center gap-2">
+            <span data-key="expRimacTitle">Rimac Seguros</span>
+            <span class="text-sm text-gray-500">Consis Internacional</span>
+            <span class="text-lg">🇵🇪</span>
+            <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Remote</span>
+          </h3>
+          <p class="text-sm text-gray-600" data-key="expRimacDesc">Java Senior Developer – December 2019 to December 2022</p>
         </div>
         <div>
-          <h3 class="text-lg font-semibold">RedLink</h3>
-          <p class="text-sm text-gray-600">Java Developer – Jan 2018 to Apr 2018</p>
+          <h3 class="text-lg font-semibold flex items-center gap-2">
+            <span data-key="expInterseguroTitle">Interseguro</span>
+            <span class="text-sm text-gray-500">Consis Internacional</span>
+            <span class="text-lg">🇵🇪</span>
+            <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Remote</span>
+          </h3>
+          <p class="text-sm text-gray-600" data-key="expInterseguroDesc">Support Java Developer – May 2018 to November 2019</p>
         </div>
         <div>
-          <h3 class="text-lg font-semibold">Matrix CPM Solutions</h3>
-          <p class="text-sm text-gray-600">SpringBoot Developer – Jan 2017 to Mar 2017</p>
+          <h3 class="text-lg font-semibold flex items-center gap-2">
+            <span data-key="expRedLinkTitle">RedLink</span>
+            <span class="text-sm text-gray-500">Argentina</span>
+            <span class="text-lg">🇦🇷</span>
+          </h3>
+          <p class="text-sm text-gray-600" data-key="expRedLinkDesc">Java Developer – January 2018 to April 2018</p>
         </div>
         <div>
-          <h3 class="text-lg font-semibold">Beconsult</h3>
-          <p class="text-sm text-gray-600">Software Developer – Jan 2008 to Jan 2017</p>
+          <h3 class="text-lg font-semibold flex items-center gap-2">
+            <span data-key="expMatrixTitle">Matrix CPM Solutions</span>
+            <span class="text-sm text-gray-500">Colombia</span>
+            <span class="text-lg">🇨🇴</span>
+          </h3>
+          <p class="text-sm text-gray-600" data-key="expMatrixDesc">SpringBoot Developer – January 2017 to March 2017</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold flex items-center gap-2">
+            <span data-key="expBeconsultTitle">Beconsult</span>
+            <span class="text-sm text-gray-500">Venezuela</span>
+            <span class="text-lg">🇻🇪</span>
+          </h3>
+          <p class="text-sm text-gray-600" data-key="expBeconsultDesc">Software Developer – January 2008 to January 2017</p>
         </div>
       </div>
     </section>
 
     <!-- Contact -->
     <section id="contact" class="bg-gray-50 py-12 px-6">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-2xl font-bold mb-6">Let's Connect</h2>
-        <div class="flex justify-center space-x-6 text-2xl">
-          <a href="https://www.linkedin.com/in/dfarfanve" class="hover:text-blue-600" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-          <a href="https://calendly.com/dfarfanve" class="hover:text-blue-600" aria-label="Calendly"><i class="far fa-calendar"></i></a>
-          <a href="tel:+5215616788424" class="hover:text-blue-600" aria-label="Phone"><i class="fas fa-phone"></i></a>
-          <a href="https://wa.me/525616788424" class="hover:text-green-500" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          <a href="skype:live:.cid.6971888662fdc162?chat" class="hover:text-blue-400" aria-label="Skype"><i class="fab fa-skype"></i></a>
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6 text-center" data-key="contactTitle">Let's Connect</h2>
+        <div class="bg-gray-900 text-green-400 p-6 rounded-lg font-mono text-sm overflow-x-auto mb-6">
+          <pre><code><span class="keyword">public class</span> <span class="class">HelloWorld</span> <span class="paren">{</span>
+    <span class="keyword">public static void</span> <span class="method">main</span><span class="paren">(</span><span class="var">String[] args</span><span class="paren">)</span> <span class="paren">{</span>
+        <span class="method">System.out</span>.<span class="method">println</span><span class="paren">(</span><span class="string">"Hello folks!"</span><span class="paren">)</span><span class="paren">;</span>
+    <span class="paren">}</span>
+<span class="paren">}</span></code></pre>
+        </div>
+        <div class="flex justify-center space-x-8 text-2xl">
+          <a href="https://www.linkedin.com/in/dfarfanve" class="contact-icon hover:text-blue-600 transition-colors duration-300" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="mailto:dfarfanve@gmail.com" class="contact-icon hover:text-red-600 transition-colors duration-300" aria-label="Gmail">
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a href="https://wa.me/523313194130" class="contact-icon hover:text-green-500 transition-colors duration-300" aria-label="WhatsApp" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i>
+          </a>
         </div>
       </div>
     </section>
 
     <footer class="text-center text-sm text-gray-500 py-6 border-t mt-6">
-      © 2025 Daniel Farfán – Made with ❤️
+      <div>
+        <span data-key="footerText">© 2025 Daniel Farfan – Hecho con 💻 ❤️ 01010101</span>
+      </div>
+      <div class="mt-1">
+        <span data-key="footerThanks">01100111 01110010 01100001 01100011 01101001 01100001 01110011 por tu visita!</span>
+      </div>
     </footer>
 
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/particles.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/index.js"></script>
+    <script src="multi-language.js"></script>
+    
+    <!-- Modal functionality -->
+    <script>
+      // Modal functionality for DF initials
+      document.getElementById('df-initials').addEventListener('click', function() {
+        document.getElementById('df-modal').classList.remove('hidden');
+      });
+      
+      document.getElementById('close-modal').addEventListener('click', function() {
+        document.getElementById('df-modal').classList.add('hidden');
+      });
+      
+      document.getElementById('close-modal-btn').addEventListener('click', function() {
+        document.getElementById('df-modal').classList.add('hidden');
+      });
+      
+      // Close modal when clicking outside
+      document.getElementById('df-modal').addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.classList.add('hidden');
+        }
+      });
+    </script>
   </body>
 </html>

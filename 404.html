@@ -1,68 +1,143 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Page Not Found</title>
     <link type="text/css" rel="stylesheet" href="./404.css" />
+    <style>
+        .language-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .language-buttons button {
+            background: none;
+            border: 2px solid #333;
+            color: #333;
+            padding: 5px 10px;
+            margin-left: 5px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .language-buttons button.active {
+            background: #333;
+            color: white;
+        }
+        .language-buttons button:hover {
+            background: #555;
+            color: white;
+        }
+    </style>
 </head>
 
-<div class="text">
-    <p>404</p>
-</div>
-<div class="container">
-    <!-- caveman left -->
-    <div class="caveman">
-        <div class="leg">
-            <div class="foot">
-                <div class="fingers"></div>
+<body>
+    <div class="language-buttons">
+        <button id="lang-en-404" onclick="changeLanguage404('en')">EN</button>
+        <button id="lang-es-404" onclick="changeLanguage404('es')">ES</button>
+    </div>
+
+    <div class="text">
+        <p>404</p>
+    </div>
+    <div class="container">
+        <!-- caveman left -->
+        <div class="caveman">
+            <div class="leg">
+                <div class="foot">
+                    <div class="fingers"></div>
+                </div>
+            </div>
+            <div class="leg">
+                <div class="foot">
+                    <div class="fingers"></div>
+                </div>
+            </div>
+            <div class="shape">
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            <div class="head">
+                <div class="eye">
+                    <div class="nose"></div>
+                </div>
+                <div class="mouth"></div>
+            </div>
+            <div class="arm-right">
+                <div class="club"></div>
             </div>
         </div>
-        <div class="leg">
-            <div class="foot">
-                <div class="fingers"></div>
+        <!-- caveman right -->
+        <div class="caveman">
+            <div class="leg">
+                <div class="foot">
+                    <div class="fingers"></div>
+                </div>
             </div>
-        </div>
-        <div class="shape">
-            <div class="circle"></div>
-            <div class="circle"></div>
-        </div>
-        <div class="head">
-            <div class="eye">
-                <div class="nose"></div>
+            <div class="leg">
+                <div class="foot">
+                    <div class="fingers"></div>
+                </div>
             </div>
-            <div class="mouth"></div>
-        </div>
-        <div class="arm-right">
-            <div class="club"></div>
+            <div class="shape">
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            <div class="head">
+                <div class="eye">
+                    <div class="nose"></div>
+                </div>
+                <div class="mouth"></div>
+            </div>
+            <div class="arm-right">
+                <div class="club"></div>
+            </div>
         </div>
     </div>
-    <!-- caveman right -->
-    <div class="caveman">
-        <div class="leg">
-            <div class="foot">
-                <div class="fingers"></div>
-            </div>
-        </div>
-        <div class="leg">
-            <div class="foot">
-                <div class="fingers"></div>
-            </div>
-        </div>
-        <div class="shape">
-            <div class="circle"></div>
-            <div class="circle"></div>
-        </div>
-        <div class="head">
-            <div class="eye">
-                <div class="nose"></div>
-            </div>
-            <div class="mouth"></div>
-        </div>
-        <div class="arm-right">
-            <div class="club"></div>
-        </div>
-    </div>
-</div>
-<button class="btn_one"><a href="https://dfarfanve.github.io/Index.html" target="_blank"
-                           style="color: inherit; text-decoration: none">Go Back...</a></button>
+    <button class="btn_one">
+        <a href="./index.html" id="goBackLink" style="color: inherit; text-decoration: none">Go Back...</a>
+    </button>
+
+    <script>
+        // Traducciones para la página 404
+        const translations404 = {
+            en: {
+                goBack: "Go Back...",
+                pageTitle: "404 - Page Not Found"
+            },
+            es: {
+                goBack: "Volver...",
+                pageTitle: "404 - Página No Encontrada"
+            }
+        };
+
+        function changeLanguage404(lang) {
+            // Guardar preferencia
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // Cambiar el atributo lang del HTML
+            document.documentElement.lang = lang;
+            
+            // Actualizar el título de la página
+            document.title = translations404[lang].pageTitle;
+            
+            // Actualizar el enlace
+            document.getElementById('goBackLink').textContent = translations404[lang].goBack;
+            
+            // Actualizar botones de idioma
+            document.getElementById('lang-en-404').classList.toggle('active', lang === 'en');
+            document.getElementById('lang-es-404').classList.toggle('active', lang === 'es');
+        }
+
+        // Inicializar idioma al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            changeLanguage404(savedLang);
+        });
+    </script>
+</body>
 
 </html>
